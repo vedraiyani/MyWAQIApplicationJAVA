@@ -28,21 +28,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Call<String> result = WAQIClient.getClient().getPoll("bfd8cf670f2835bf31301292cc4b994535d059f9");
+
+        Call<String> result = WAQIClient.getClient().getFeed("Beijing");
 
         result.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                    Log.i("WAQIService",response.body().toString());
-
+                Log.i("WAQIService CityBased",response.body().toString());
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 t.printStackTrace();
-
             }
         });
+
+//        WAQIClient.getClient().getFeed("31.224361", "121.469170")
+//                .enqueue(new Callback<String>() {
+//                    @Override
+//                    public void onResponse(Call<String> call, Response<String> response) {
+//                        Log.i("WAQIService GeoBased", response.body().toString());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<String> call, Throwable t) {
+//                        t.printStackTrace();
+//                    }
+//                });
     }
 
 }

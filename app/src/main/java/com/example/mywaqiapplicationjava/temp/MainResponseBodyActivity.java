@@ -1,4 +1,4 @@
-package com.example.mywaqiapplicationjava.com.example.mywaqiapplicationjava.temp;
+package com.example.mywaqiapplicationjava.temp;
 
 import android.os.Bundle;
 

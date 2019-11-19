@@ -10,8 +10,8 @@ public class WAQIClient {
     }
     private static synchronized void initWAQIService(){
         if(service==null){
-            service = new Retrofit.Builder()
-                    .baseUrl("https://api.waqi.info/")
+            service = new Retrofit.Builder()//"https://api.waqi.info/"
+                    .baseUrl("https://api.waqi.info/")//https://mypds.herokuapp.com/pollutionservice
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .build()
                     .create(WAQIService.class);
@@ -20,11 +20,7 @@ public class WAQIClient {
     }
     public static WAQIService getClient(){
         if(service==null){
-                service = new Retrofit.Builder()
-                        .baseUrl("https://api.waqi.info/")
-                        .addConverterFactory(ScalarsConverterFactory.create())
-                        .build()
-                        .create(WAQIService.class);
+                initWAQIService();
         }
         return service;
     }

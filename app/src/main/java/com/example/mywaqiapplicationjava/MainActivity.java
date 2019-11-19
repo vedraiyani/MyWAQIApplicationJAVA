@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.mywaqiapplicationjava.api.WAQIClient;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -16,9 +18,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Query;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,18 +28,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.waqi.info/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        final WAQIService service = retrofit.create(WAQIService.class);
-        Call<String> result = service.getPoll("bfd8cf670f2835bf31301292cc4b994535d059f9");
+        Call<String> result = WAQIClient.getClient().getPoll("bfd8cf670f2835bf31301292cc4b994535d059f9");
 
         result.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                    Log.i("MyTest>>>>>>>>>>>>>>>>",response.body().toString());
+                    Log.i("WAQIService",response.body().toString());
 
             }
 
@@ -49,9 +44,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-//    https://api.waqi.info/feed/beijing/?token=bfd8cf670f2835bf31301292cc4b994535d059f9
-    public interface WAQIService {
-        @GET("/feed/beijing/")
-        Call<String> getPoll(@Query("token") String token);
-    }
+
 }

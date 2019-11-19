@@ -1,8 +1,10 @@
-package com.example.mywaqiapplicationjava;
+package com.example.mywaqiapplicationjava.com.example.mywaqiapplicationjava.temp;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mywaqiapplicationjava.R;
 
 import java.io.IOException;
 
